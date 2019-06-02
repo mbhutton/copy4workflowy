@@ -1,0 +1,39 @@
+parserOptions:
+  ecmaVersion: 2017
+env:
+  browser: true
+  es6: true
+  greasemonkey: true
+extends: 'eslint:recommended'
+rules:
+  indent:
+    - error
+    - 2
+    - SwitchCase: 1
+  linebreak-style:
+    - error
+    - unix
+  quotes:
+    - error
+    - double
+    - avoidEscape: true
+  semi:
+    - error
+    - always
+  no-template-curly-in-string:
+    - error
+  valid-jsdoc:
+    - error
+  eqeqeq:
+    - error
+  dot-notation:
+    - error
+  comma-dangle:
+    - error
+    - only-multiline
+  no-trailing-spaces:
+    - error
+  no-warning-comments:
+    - warn
+  no-console:
+    - off

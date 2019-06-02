@@ -1,0 +1,15 @@
+{
+  "name": "copy4workflowy",
+  "version": "this.should.not.be.used.as.a.dependency",
+  "description": "User script for copying a page title and URL as a WorkFlowy note",
+  "main": "copy4workflowy.user.js",
+  "repository": "https://github.com/mbhutton/copy4workflowy.git",
+  "author": "Matt Hutton <mbhutton@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "devDependencies": {
+    "eslint": "^4.17.0",
+    "prettier": "1.10.2",
+    "typescript": "^3.3.1"
+  }
+}
