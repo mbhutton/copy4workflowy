@@ -22,9 +22,12 @@ then paste the clipboard contents into WorkFlowy.
 
 A notification is shown when the page title and URL are copied to the clipboard.
 
+Special handling is given for WorkFlowy pages:
+- URLs on WorkFlowy dev and beta domains are replaced with the workflowy.com domain.
+- Page titles for WorkFlowy items are edited to emphasise that they are links.
+
 ## Limitations
 
-- No special handling is given for WorkFlowy pages (re alternative domains, and more useful page titles).
 - The keyboard shortcut is hard coded and cannot be changed without modifying the script.
 - It won't work on any web sites which aren't scriptable by Tampermonkey.
 

@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Copy for WorkFlowy
 // @namespace    https://github.com/mbhutton/copy4workflowy
-// @version      0.1.0.1
+// @version      0.1.0.2
 // @description  Copies the URL and title of the current page for pasting into WorkFlowy
 // @author       Matt Hutton
 // @include      *
@@ -75,17 +75,43 @@
 `.trim();
   }
 
+  /**
+   * @param {string} url The URL to normalise. Dev and beta workflowy.com domains
+   *                 are normalised to the production workflowy.com domain.
+   * @returns {string} The normalised version.
+   */
+  function normaliseUrl(url) {
+    for (var domain of ["dev.workflowy.com", "beta.workflowy.com"]) {
+      var prefix = `https://${domain}`;
+      if (url.startsWith(prefix)) {
+        url = `https://workflowy.com${url.substring(prefix.length)}`;
+      }
+    }
+    return url;
+  }
+
+  /**
+   * @param {string} title The page title to normalise. For WF pages, the title
+   *                 is wrapped in text to emphasize that it is a link.
+   * @param {string} url The URL of the page
+   * @returns {string} The normalised version.
+   */
+  function normaliseTitle(title, url) {
+    if (normaliseUrl(url).startsWith("https://workflowy.com/#/")) {
+      title = `<i>See: "${title}"</i>`;
+    }
+    return title;
+  }
+
   function keyListener(keyEvent) {
     if (isKeyboardShortcut(keyEvent)) {
-      const data = toWorkFlowyNoteOpml(
-        document.title,
-        document.location.toString()
-      );
+      const url = normaliseUrl(document.location.toString());
+      const normalisedTitle = normaliseTitle(document.title, url);
+      const data = toWorkFlowyNoteOpml(normalisedTitle, url);
       const metadata = { type: "text", mimetype: "text/plain" };
       GM_setClipboard(data, metadata);
-      const notifTitle = "Success: Copied title & URL";
-      const notifText = document.title;
-      GM_notification({ title: notifTitle, text: notifText }, null); // eslint-disable-line no-undef
+      const notificationTitle = "Success: Copied title & URL";
+      GM_notification({ title: notificationTitle, text: document.title }, null); // eslint-disable-line no-undef
       keyEvent.stopPropagation();
       keyEvent.preventDefault();
     }
