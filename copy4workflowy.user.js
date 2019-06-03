@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Copy for WorkFlowy
 // @namespace    https://github.com/mbhutton/copy4workflowy
-// @version      0.1.0.2
+// @version      0.1.0.3
 // @description  Copies the URL and title of the current page for pasting into WorkFlowy
 // @author       Matt Hutton
 // @include      *
@@ -98,6 +98,7 @@
    */
   function normaliseTitle(title, url) {
     if (normaliseUrl(url).startsWith("https://workflowy.com/#/")) {
+      title = title.replace(/ - WorkFlowy$/, "");
       title = `<i>See: "${title}"</i>`;
     }
     return title;
