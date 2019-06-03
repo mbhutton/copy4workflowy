@@ -1,11 +1,12 @@
 // ==UserScript==
 // @name         Copy for WorkFlowy
 // @namespace    https://github.com/mbhutton/copy4workflowy
-// @version      0.1.0.0
+// @version      0.1.0.1
 // @description  Copies the URL and title of the current page for pasting into WorkFlowy
 // @author       Matt Hutton
 // @include      *
 // @grant        GM_setClipboard
+// @grant        GM_notification
 // @run-at       document-start
 // @downloadURL  https://github.com/mbhutton/copy4workflowy/raw/master/copy4workflowy.user.js
 // ==/UserScript==
@@ -82,6 +83,9 @@
       );
       const metadata = { type: "text", mimetype: "text/plain" };
       GM_setClipboard(data, metadata);
+      const notifTitle = "Success: Copied title & URL";
+      const notifText = document.title;
+      GM_notification({ title: notifTitle, text: notifText }, null); // eslint-disable-line no-undef
       keyEvent.stopPropagation();
       keyEvent.preventDefault();
     }

@@ -20,11 +20,12 @@ in OPML form, for pasting into WorkFlowy.
 Press the keyboard shortcut (currently hard coded as ctrl-shift-7) on a web page,
 then paste the clipboard contents into WorkFlowy.
 
+A notification is shown when the page title and URL are copied to the clipboard.
+
 ## Limitations
 
 - No special handling is given for WorkFlowy pages (re alternative domains, and more useful page titles).
 - The keyboard shortcut is hard coded and cannot be changed without modifying the script.
-- No feedback is given to indicate whether the copy was successful.
 - It won't work on any web sites which aren't scriptable by Tampermonkey.
 
 ## Developing
